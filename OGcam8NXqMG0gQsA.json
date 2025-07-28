@@ -1,0 +1,517 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Google Sheets6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets6": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets7": {
+      "main": [
+        [
+          {
+            "node": "Replace Me1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command1": {
+      "main": [
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        [
+          {
+            "node": "Получаем ссылку IMGBB1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Получаем ссылку IMGBB1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Execute Command1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-11T15:47:39.364Z",
+  "id": "OGcam8NXqMG0gQsA",
+  "isArchived": false,
+  "meta": null,
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -660,
+        80
+      ],
+      "id": "eeb53a08-4ed7-4e05-ac16-e6c532901fee",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -220,
+        80
+      ],
+      "id": "707eb631-3dc4-4845-b813-e4c9dbd6feee",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E",
+          "mode": "list",
+          "cachedResultName": "Контент тестовый",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1360027198,
+          "mode": "list",
+          "cachedResultName": "!Категории",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit#gid=1360027198"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -440,
+        80
+      ],
+      "id": "c0df2c33-6216-4b71-bcc8-b74be1444f7e",
+      "name": "Google Sheets",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E",
+          "mode": "list",
+          "cachedResultName": "Контент тестовый",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $json['Категории постов:'] }}",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e5375c4c-8248-4ad9-ac2a-85598bbd2618",
+      "name": "Google Sheets6",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E",
+          "mode": "list",
+          "cachedResultName": "Контент тестовый",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $('Loop Over Items1').item.json['Категории постов:'] }}",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Google Sheets6').item.json.row_number }}",
+            "Текст": "=",
+            "Картинка": "={{ $json.data.url }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Текст",
+              "displayName": "Текст",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Картинка",
+              "displayName": "Картинка",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Тема",
+              "displayName": "Тема",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1980,
+        0
+      ],
+      "id": "c8cefcca-a4ec-4121-abc1-8373b40c32b1",
+      "name": "Google Sheets7"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me1",
+      "typeVersion": 1,
+      "position": [
+        2160,
+        500
+      ],
+      "id": "5dbc1dcd-1eac-4e92-9dbd-bbcfc5f52d17"
+    },
+    {
+      "parameters": {
+        "executeOnce": false,
+        "command": "={{ $json.selectedTemplate }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1180,
+        0
+      ],
+      "id": "cc2a02ff-8aff-43aa-a4f5-81cadb2882f6",
+      "name": "Execute Command1",
+      "retryOnFail": true,
+      "alwaysOutputData": false,
+      "maxTries": 2,
+      "waitBetweenTries": 500,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7a0ea773-2356-4f4c-a12c-f56d1078090c",
+              "name": "HTML1",
+              "value": "=node -e \"\nconst puppeteer = require('puppeteer');\n(async () => {\n  const html = \\`\n  <!DOCTYPE html>\n  <html lang='ru'>\n  <head>\n    <meta charset='UTF-8' />\n    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap' rel='stylesheet'>\n    <style>\n      html, body { margin: 0; padding: 0; }\n      .banner {\n        position: relative;\n        width: 1200px; height: 630px;\n        background-image: url('https://i.ibb.co/KjH7tTvP/Chat-GPT-Image-30-2025-16-55-34.png');\n        background-size: cover;\n        background-position: center;\n        font-family: 'Montserrat', sans-serif;\n      }\n      .safe-area {\n        position: absolute;\n        top: 100px; left: 10px;\n        width: 700px; height: 330px;\n        padding: 20px; box-sizing: border-box;\n        display: flex; align-items: center; justify-content: center;\n        overflow: hidden;\n      }\n      .text {\n        color: white; font-weight: 900;\n        text-align: center;\n        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);\n        display: inline-block;\n        width: 100%;\n        line-height: 1.1;\n        word-break: break-word;\n        white-space: normal;\n      }\n    </style>\n  </head>\n  <body>\n    <div class='banner'>\n      <div class='safe-area'>\n        <div class='text' id='text'>\n          КАК ПРАВИЛЬНО ИСПОЛЬЗОВАТЬ ПОЗИЦИЮ ЗА СТОЛОМ?\n        </div>\n      </div>\n    </div>\n    <script>\n      function fitText(elId, min = 10, max = 200) {\n        const el = document.getElementById(elId);\n        const container = el.parentElement;\n        let fontSize = min;\n        el.style.fontSize = fontSize + 'px';\n        while (el.scrollHeight <= container.clientHeight &&\n               el.scrollWidth <= container.clientWidth &&\n               fontSize < max) {\n          fontSize++;\n          el.style.fontSize = fontSize + 'px';\n        }\n        if (el.scrollHeight > container.clientHeight ||\n            el.scrollWidth > container.clientWidth) {\n          fontSize--;\n          el.style.fontSize = fontSize + 'px';\n        }\n      }\n      window.addEventListener('load', () => fitText('text'));\n      window.addEventListener('resize', () => fitText('text'));\n    </script>\n  </body>\n  </html>\\`;\n\n  const browser = await puppeteer.launch({\n    headless: true,\n    args: ['--no-sandbox'],\n    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium'\n  });\n\n  const page = await browser.newPage();\n  await page.setViewport({ width: 1200, height: 630 });\n  await page.setContent(html, { waitUntil: 'networkidle0' });\n  await new Promise(r => setTimeout(r, 500));\n  const buffer = await page.screenshot({ type: 'jpeg' });\n  process.stdout.write(buffer.toString('base64'));\n  await browser.close();\n  await new Promise(resolve => setTimeout(resolve, 15000));\n})();\n\"",
+              "type": "string"
+            },
+            {
+              "id": "e42f284c-7ec9-4e6e-a71b-e7cee351dcbb",
+              "name": "HTML2",
+              "value": "=node -e \"\nconst puppeteer = require('puppeteer');\n(async () => {\n  const html = \\`\n  <!DOCTYPE html>\n  <html lang='ru'>\n  <head>\n    <meta charset='UTF-8' />\n    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap' rel='stylesheet'>\n    <style>\n      html, body { margin: 0; padding: 0; }\n      .banner {\n        position: relative;\n        width: 1200px; height: 630px;\n        background-image: url('https://i.ibb.co/0825Lqw/Chat-GPT-Image-1-2025-22-05-04.png');\n        background-size: cover;\n        background-position: center;\n        font-family: 'Montserrat', sans-serif;\n      }\n      .safe-area {\n        position: absolute;\n        top: 100px; left: 225px;\n        width: 700px; height: 330px;\n        padding: 20px; box-sizing: border-box;\n        display: flex; align-items: center; justify-content: center;\n        overflow: hidden;\n      }\n      .text {\n        color: white; font-weight: 900;\n        text-align: center;\n        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);\n        display: inline-block;\n        width: 100%;\n        line-height: 1.1;\n        word-break: break-word;\n        white-space: normal;\n      }\n    </style>\n  </head>\n  <body>\n    <div class='banner'>\n      <div class='safe-area'>\n        <div class='text' id='text'>\n          КАК ПРАВИЛЬНО ИСПОЛЬЗОВАТЬ ПОЗИЦИЮ ЗА СТОЛОМ?\n        </div>\n      </div>\n    </div>\n    <script>\n      function fitText(elId, min = 10, max = 200) {\n        const el = document.getElementById(elId);\n        const container = el.parentElement;\n        let fontSize = min;\n        el.style.fontSize = fontSize + 'px';\n        while (el.scrollHeight <= container.clientHeight &&\n               el.scrollWidth <= container.clientWidth &&\n               fontSize < max) {\n          fontSize++;\n          el.style.fontSize = fontSize + 'px';\n        }\n        if (el.scrollHeight > container.clientHeight ||\n            el.scrollWidth > container.clientWidth) {\n          fontSize--;\n          el.style.fontSize = fontSize + 'px';\n        }\n      }\n      window.addEventListener('load', () => fitText('text'));\n      window.addEventListener('resize', () => fitText('text'));\n    </script>\n  </body>\n  </html>\\`;\n\n  const browser = await puppeteer.launch({\n    headless: true,\n    args: ['--no-sandbox'],\n    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium'\n  });\n\n  const page = await browser.newPage();\n  await page.setViewport({ width: 1200, height: 630 });\n  await page.setContent(html, { waitUntil: 'networkidle0' });\n  await new Promise(r => setTimeout(r, 500));\n  const buffer = await page.screenshot({ type: 'jpeg' });\n  process.stdout.write(buffer.toString('base64'));\n  await browser.close();\n  await new Promise(resolve => setTimeout(resolve, 15000));  \n})();\n\"",
+              "type": "string"
+            },
+            {
+              "id": "48163287-4108-44c0-8cc3-08b8706ee4f0",
+              "name": "HTML3",
+              "value": "=node -e \"\nconst puppeteer = require('puppeteer');\n(async () => {\n  const html = \\`\n  <!DOCTYPE html>\n  <html lang='ru'>\n  <head>\n    <meta charset='UTF-8' />\n    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap' rel='stylesheet'>\n    <style>\n      html, body { margin: 0; padding: 0; }\n      .banner {\n        position: relative;\n        width: 1200px; height: 630px;\n        background-image: url('https://i.ibb.co/xKts7Pmf/Chat-GPT-Image-1-2025-22-01-27.png');\n        background-size: cover;\n        background-position: center;\n        font-family: 'Montserrat', sans-serif;\n      }\n      .safe-area {\n        position: absolute;\n        top: 100px; left: 225px;\n        width: 700px; height: 330px;\n        padding: 20px; box-sizing: border-box;\n        display: flex; align-items: center; justify-content: center;\n        overflow: hidden;\n      }\n      .text {\n        color: white; font-weight: 900;\n        text-align: center;\n        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);\n        display: inline-block;\n        width: 100%;\n        line-height: 1.1;\n        word-break: break-word;\n        white-space: normal;\n      }\n    </style>\n  </head>\n  <body>\n    <div class='banner'>\n      <div class='safe-area'>\n        <div class='text' id='text'>\n          КАК ПРАВИЛЬНО ИСПОЛЬЗОВАТЬ ПОЗИЦИЮ ЗА СТОЛОМ?\n        </div>\n      </div>\n    </div>\n    <script>\n      function fitText(elId, min = 10, max = 200) {\n        const el = document.getElementById(elId);\n        const container = el.parentElement;\n        let fontSize = min;\n        el.style.fontSize = fontSize + 'px';\n        while (el.scrollHeight <= container.clientHeight &&\n               el.scrollWidth <= container.clientWidth &&\n               fontSize < max) {\n          fontSize++;\n          el.style.fontSize = fontSize + 'px';\n        }\n        if (el.scrollHeight > container.clientHeight ||\n            el.scrollWidth > container.clientWidth) {\n          fontSize--;\n          el.style.fontSize = fontSize + 'px';\n        }\n      }\n      window.addEventListener('load', () => fitText('text'));\n      window.addEventListener('resize', () => fitText('text'));\n    </script>\n  </body>\n  </html>\\`;\n\n  const browser = await puppeteer.launch({\n    headless: true,\n    args: ['--no-sandbox'],\n    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium'\n  });\n\n  const page = await browser.newPage();\n  await page.setViewport({ width: 1200, height: 630 });\n  await page.setContent(html, { waitUntil: 'networkidle0' });\n  await new Promise(r => setTimeout(r, 500));\n  const buffer = await page.screenshot({ type: 'jpeg' });\n  process.stdout.write(buffer.toString('base64'));\n  await browser.close();\n  await new Promise(resolve => setTimeout(resolve, 15000));\n})();\n\"",
+              "type": "string"
+            },
+            {
+              "id": "3e6aa1ff-634c-4289-93ca-b68da99b4ac3",
+              "name": "HTML4",
+              "value": "=node -e \"\nconst puppeteer = require('puppeteer');\n(async () => {\n  const html = \\`\n  <!DOCTYPE html>\n  <html lang='ru'>\n  <head>\n    <meta charset='UTF-8' />\n    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap' rel='stylesheet'>\n    <style>\n      html, body { margin: 0; padding: 0; }\n      .banner {\n        position: relative;\n        width: 1200px; height: 630px;\n        background-image: url('https://i.ibb.co/0RLmLzMH/Chat-GPT-Image-2-2025-10-42-08.png');\n        background-size: cover;\n        background-position: center;\n        font-family: 'Montserrat', sans-serif;\n      }\n      .safe-area {\n        position: absolute;\n        top: 100px; left: 225px;\n        width: 700px; height: 330px;\n        padding: 20px; box-sizing: border-box;\n        display: flex; align-items: center; justify-content: center;\n        overflow: hidden;\n      }\n      .text {\n        color: white; font-weight: 900;\n        text-align: center;\n        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);\n        display: inline-block;\n        width: 100%;\n        line-height: 1.1;\n        word-break: break-word;\n        white-space: normal;\n      }\n    </style>\n  </head>\n  <body>\n    <div class='banner'>\n      <div class='safe-area'>\n        <div class='text' id='text'>\n          КАК ПРАВИЛЬНО ИСПОЛЬЗОВАТЬ ПОЗИЦИЮ ЗА СТОЛОМ?\n        </div>\n      </div>\n    </div>\n    <script>\n      function fitText(elId, min = 10, max = 200) {\n        const el = document.getElementById(elId);\n        const container = el.parentElement;\n        let fontSize = min;\n        el.style.fontSize = fontSize + 'px';\n        while (el.scrollHeight <= container.clientHeight &&\n               el.scrollWidth <= container.clientWidth &&\n               fontSize < max) {\n          fontSize++;\n          el.style.fontSize = fontSize + 'px';\n        }\n        if (el.scrollHeight > container.clientHeight ||\n            el.scrollWidth > container.clientWidth) {\n          fontSize--;\n          el.style.fontSize = fontSize + 'px';\n        }\n      }\n      window.addEventListener('load', () => fitText('text'));\n      window.addEventListener('resize', () => fitText('text'));\n    </script>\n  </body>\n  </html>\\`;\n\n  const browser = await puppeteer.launch({\n    headless: true,\n    args: ['--no-sandbox'],\n    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium'\n  });\n\n  const page = await browser.newPage();\n  await page.setViewport({ width: 1200, height: 630 });\n  await page.setContent(html, { waitUntil: 'networkidle0' });\n  await new Promise(r => setTimeout(r, 500));\n  const buffer = await page.screenshot({ type: 'jpeg' });\n  process.stdout.write(buffer.toString('base64'));\n  await browser.close();\n  await new Promise(resolve => setTimeout(resolve, 15000));\n})();\n\"",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        660,
+        0
+      ],
+      "id": "7f6fee24-78f3-4a92-bd31-ab281202cd00",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "stdout",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1540,
+        0
+      ],
+      "id": "4c10eac3-a9cd-43bb-92a5-505c6f3513cb",
+      "name": "Convert to File1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.imgbb.com/1/upload?key=8eab1369fa5f6be053179a6deacb7667",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "image",
+              "value": "={{ $('Execute Command1').item.json.stdout }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1760,
+        0
+      ],
+      "id": "e326db7a-17ae-4023-a77e-6cf12c7c2ea9",
+      "name": "Получаем ссылку IMGBB1"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  const htmlKeys = Object.keys(item.json).filter(k => k.startsWith(\"HTML\"));\n  const randomKey = htmlKeys[Math.floor(Math.random() * htmlKeys.length)];\n  const htmlCode = item.json[randomKey];\n\n  return {\n    json: {\n      selectedTemplate: htmlCode,\n      Text: item.json.Text // Сохраняем, если нужно для отладки\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        0
+      ],
+      "id": "53fd051b-3d01-46ef-a72d-98c2580772ee",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7a0ea773-2356-4f4c-a12c-f56d1078090c",
+              "name": "Text",
+              "value": "={{ $json['Заголовок для картинки'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        460,
+        0
+      ],
+      "id": "1e65711b-a6f2-410a-bd18-551ad0d409b9",
+      "name": "Edit1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5f389553-5d23-4bce-9e0a-7b14d87ae1a9",
+              "leftValue": "={{ $json['Картинка'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "ed489964-760d-4e58-9907-38bd40a6878c",
+      "name": "If"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "fbkingowner",
+    "name": "n8n-backup"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-11T15:47:39.364Z",
+  "versionId": "b3fa937c-9442-4f8a-9a89-1709393ec9c2"
+}
