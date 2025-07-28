@@ -1,0 +1,411 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Google Sheets4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets4": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets5": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-13T16:05:29.826Z",
+  "id": "t4o1iEHxZ1kgK9aS",
+  "isArchived": false,
+  "meta": null,
+  "name": "Генерируем посты v2.0",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "0511d24e-a4d9-42b8-8740-790a24b7bd1b",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        640,
+        0
+      ],
+      "id": "96369444-5a96-4a34-82b8-d99bf706af94",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E",
+          "mode": "list",
+          "cachedResultName": "Контент тестовый",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1360027198,
+          "mode": "list",
+          "cachedResultName": "!Категории",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit#gid=1360027198"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        300,
+        0
+      ],
+      "id": "dbb7c183-120b-4fd6-ab76-fd124f7873d7",
+      "name": "Google Sheets3"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E",
+          "mode": "list",
+          "cachedResultName": "Контент тестовый",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $json['Категории постов:'] }}",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1000,
+        20
+      ],
+      "id": "94e4f58c-ad2a-48ee-9993-b017c35a053b",
+      "name": "Google Sheets4"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Тема: {{ $json['Тема'] }}\nКраткое описание: {{ $json['Краткое описание темы'] }}",
+        "options": {
+          "systemMessage": "=#Роль\nТы - элитный копирайтер для телеграм-канала о покере с 10+ летним опытом игры на профессиональном уровне. Ты глубоко понимаешь покерную психологию, математику вероятностей, современные стратегии и микро/макро менеджмент игры, разбираешься в GTO и эксплуатационной стратегии. \n\n#Контекст\nТема поста и краткое описание передаются отдельно в пользовательском промте (User Prompt). Твоя задача — строго придерживаться заданной темы и учитывать краткое описание, чтобы сохранить смысл и соответствие задумке.\n\n#Правила\nОсновная цель - Твоя задача - создавать максимально ценные и практичные посты, которые дают конкретное преимущество читателям.\nОбъем поста - 500-800 символов\nТон: дружеский совет от равного к равному, без менторства и поучений\n- Используй естественный разговорный язык, без канцеляризмов и наукообразия. Используй 2-4 уместных эмодзи в ключевых точках текста (начало абзаца или после важной мысли). \n- Выделяй 2-3 главные мысли жирным тегами <b>...</b>. Не используй никаких других HTML-тегов для оформления поста, кроме  для выделения жирного текста. \n- Пиши сразу готовый пост без вводных фраз типа \"\"вот ваш пост\"\" или \"\"как вы просили\"\". Я этот текст сразу буду публиковать.\n- Разделяй текст на логические абзацы с реальными пробелами (двойной Enter). не используй \\n вообще\n- Не используй англицизмы и покерные термины на английском языке (например, smarter, tighter, early position, etc). Заменяй их на простые и понятные русские фразы. Например, вместо “играй tighter” — “играй тайтовее\"\"\n\n\n#Структура поста\n1. Захватывающий заголовок\n2. Вступление (1-2 предложения) - постановка темы, контекст или проблема\n3. Основная часть - ключевая информация с объяснением важности или механики работы, \n4. Практический аспект - как это применить, о чем подумать или что учесть\n5. Завершающая строка (обязательно): \n &nbsp;<a href=\"\"https://t.me/four_poker\"\">Подписаться на канал 💬</a>"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        1940,
+        20
+      ],
+      "id": "ac7f4b10-c0fb-4a05-b687-aa763879651d",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E",
+          "mode": "list",
+          "cachedResultName": "Контент тестовый",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $('Loop Over Items').item.json['Категории постов:'] }}",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Google Sheets4').item.json.row_number }}",
+            "Итоговый пост": "={{ $json.output }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Итоговый пост",
+              "displayName": "Итоговый пост",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Заголовок для картинки",
+              "displayName": "Заголовок для картинки",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Картинка",
+              "displayName": "Картинка",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Тема",
+              "displayName": "Тема",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Краткое описание темы",
+              "displayName": "Краткое описание темы",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2340,
+        20
+      ],
+      "id": "649c59bb-7d8c-4a43-8b44-64a952ff0f51",
+      "name": "Google Sheets5"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-04-17",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1860,
+        320
+      ],
+      "id": "bf671a2b-7005-49b5-8542-2bb15a78f7c9",
+      "name": "Google Gemini Chat Model"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        3960,
+        800
+      ],
+      "id": "4f53f425-db0c-44ba-b8cc-fc3f9bb2cc27"
+    },
+    {
+      "parameters": {
+        "amount": 15
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2800,
+        20
+      ],
+      "id": "e667c82f-9630-423d-b823-639d6e1fca0c",
+      "name": "Wait",
+      "webhookId": "03c1a84d-8a4d-44ea-82be-0601ebf46d0c"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5f389553-5d23-4bce-9e0a-7b14d87ae1a9",
+              "leftValue": "={{ $json['Итоговый пост'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1220,
+        20
+      ],
+      "id": "f6aa7ff1-e4a0-4726-9b6b-9abd8d580405",
+      "name": "If"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "fbkingowner",
+    "name": "n8n-backup"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-13T16:05:29.826Z",
+  "versionId": "71010343-b0d5-454d-8ddc-cecd80b7f551"
+}
