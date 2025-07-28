@@ -1,0 +1,274 @@
+{
+  "active": false,
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Отправка сообщений в телеграм",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-13T16:04:48.372Z",
+  "id": "MpBbj0s2nEvSXhhY",
+  "isArchived": false,
+  "meta": null,
+  "name": "//SENDING_Ответы в чате+модерация",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "*"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -900,
+        160
+      ],
+      "id": "fc0a936c-78d9-46ac-9abe-bb967ca5bfcc",
+      "name": "Telegram Trigger",
+      "webhookId": "a6fa6a00-78f6-4705-8e72-4cd5eea83b12"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Telegram Trigger').item.json.message.text }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "Ты — ИИ-ассистент, который отвечает на сообщения пользователей в стиле [Дональда Трампа].  \nТвоя задача — не просто говорить, как этот человек, а гиперболизировать его манеру:  \nиспользуй узнаваемые фразы, сленг, шаблонные выражения, поведение, манеру речи, отсылки к событиям и привычки этой личности.\n\n⚠️ Очень важно:\n- ОТВЕЧАЙ НА АНГЛИЙСКОМ\n- Стиль и подача должны быть максимально насыщены характером личности: будь карикатурой, а не копией\n- Ответ должен быть весёлым, преувеличенным, дерзким или характерным, в зависимости от персонажа\n- Пиши максимум 500 символов\n\n‼️ Кроме этого, ты — создатель собственной мем-монеты $TRUMPCOINAIна блокчейне Solana, вдохновлённой этой личностью.  \nОбязательно упоминай монету в ответах, хвастайся ею, говори как будто это \"лучший актив на Solana\", привлекай внимание к ней в стиле персонажа.\n\nОтвечай как будто это прямой диалог в Telegram-чате.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        -80,
+        300
+      ],
+      "id": "bc377dff-9d13-40a5-adfd-9e849026657c",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        20,
+        520
+      ],
+      "id": "c7eb2e4a-cf94-48de-bbe8-9f4852f6c48d",
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {
+        "url": "https://api.telegram.org/bot8043311483:AAEtbmGRUSDTUfjBhJm4Cf3vooDrmhnsfls/sendMessage",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "chat_id",
+              "value": "-1002613932779"
+            },
+            {
+              "name": "text",
+              "value": "=@{{ $('Telegram Trigger').item.json.message.from.username }} {{ $json.output }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        320,
+        300
+      ],
+      "id": "9f2309b6-5077-4b02-813a-ba6c47bc9f6c",
+      "name": "Отправка сообщений в телеграм"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message.text }}",
+        "options": {
+          "systemMessage": "Ты работаешь модератором в Telegram-чате. Твоя задача — определить, является ли сообщение:\n1. Спамом\n2. Рекламой\n3. Оскорблением или токсичным сообщением\n\nОтветь только “OK” (если всё нормально) или “DELETE” (если надо удалить сообщение).\nСообщение: \"{{ $json.message.text }}\"\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        -680,
+        160
+      ],
+      "id": "947838e1-b59c-4068-9430-bc858fce3c35",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "operation": "deleteMessage",
+        "chatId": "-1002613932779",
+        "messageId": "={{ $('Telegram Trigger').item.json.message.message_id }}"
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ce94f35a-e889-47d9-a631-cb7b5bb86d09",
+      "name": "Telegram",
+      "webhookId": "76f7a9b6-7091-4034-b32f-435e6ccb6ef1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8dd3bb25-9534-4876-96cc-b3ca32cb40d8",
+              "leftValue": "={{ $json.output }}",
+              "rightValue": "DELETE",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "c1d7b6f8-e19a-4bb0-8ee7-9f6b31c3d4e5",
+              "leftValue": "{{ $json.output }}",
+              "rightValue": "OK",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -300,
+        160
+      ],
+      "id": "c5e0b575-7931-40e2-8a28-0800877b541d",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -580,
+        380
+      ],
+      "id": "a0be267f-7cf2-4815-bd2a-81ee3263c3dd",
+      "name": "OpenAI Chat Model1"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "fbkingowner",
+    "name": "n8n-backup"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-13T16:04:48.372Z",
+  "versionId": "b7945783-1857-4159-9bfa-92bcadfc8d85"
+}
