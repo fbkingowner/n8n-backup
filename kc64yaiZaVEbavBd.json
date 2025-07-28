@@ -1,0 +1,550 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Execute Command1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command1": {
+      "main": [
+        [
+          {
+            "node": "Получаем ссылку IMGBB1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Search files and folders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Получаем ссылку IMGBB1": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Replace Me1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-03T13:43:00.670Z",
+  "id": "kc64yaiZaVEbavBd",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "//СИЛА ДУМКИ Изображение",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        220,
+        -340
+      ],
+      "id": "cedfb077-2c0d-4319-8436-5deafd989c30",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1E6rTIPZOGd9n1YbqolDFcEihe6O60w6w",
+            "mode": "list",
+            "cachedResultName": "Для Сила Думки",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1E6rTIPZOGd9n1YbqolDFcEihe6O60w6w"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1140,
+        -600
+      ],
+      "id": "f2890f94-9e01-456b-a121-a5dacbab48a1",
+      "name": "Search files and folders",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "76kLwWtLsvh4khf6",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {
+          "binaryPropertyName": "data"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1580,
+        -600
+      ],
+      "id": "3f21d575-23c2-4ee7-ac76-ad692dadc690",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "76kLwWtLsvh4khf6",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Перемешиваем массив\nconst shuffled = [...items].sort(() => 0.5 - Math.random());\n\n// Берём первые 4 элемента\nconst selected = shuffled.slice(0, 4);\n\n// Возвращаем их\nreturn selected;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1360,
+        -600
+      ],
+      "id": "7185b636-b8c2-42b7-9168-b02a80559c05",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "command": "={{ $json.execCommandCode }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        2240,
+        -600
+      ],
+      "id": "e64ddbc1-6e65-4e4d-9420-d1d8c2cc39a0",
+      "name": "Execute Command"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "=/tmp/image_{{$json[\"id\"]}}.jpg",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        1800,
+        -600
+      ],
+      "id": "a4ee6967-3ffa-4e97-90d6-2a7dd35f1d23",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Вход: items — массив объектов с полем fileName\n// Возьмём fileName для путей\nconst paths = items.map(item => item.json.fileName);\n\n// Собираем JS-код для execute command с динамическими путями\nconst execCommandCode = `node -e 'const fs=require(\"fs\").promises;const puppeteer=require(\"puppeteer\");(async()=>{const paths=${JSON.stringify(paths)};const imgTags=paths.map(p=>\\`<img src=\"file://\\${p}\"/>\\`).join(\"\");const html=\\`<!DOCTYPE html><html><head><style>body{margin:0;padding:0;width:1024px;height:1024px;display:grid;grid-template-columns:512px 512px;grid-template-rows:512px 512px;position:relative;}img{width:512px;height:512px;object-fit:cover;}.overlay{position:absolute;top:0;left:0;width:1024px;height:1024px;background-color:rgba(128,0,128,0.5);pointer-events:none;}.divider-vertical{position:absolute;top:0;bottom:0;left:512px;width:8px;background:white;}.divider-horizontal{position:absolute;left:0;right:0;top:512px;height:8px;background:white;}</style></head><body>\\${imgTags}<div class=\"overlay\"></div><div class=\"divider-vertical\"></div><div class=\"divider-horizontal\"></div></body></html>\\`;const tmpPath=\"/tmp/collage.html\";await fs.writeFile(tmpPath,html,\"utf-8\");const browser=await puppeteer.launch({headless:true,args:[\"--no-sandbox\"]});const page=await browser.newPage();await page.setViewport({width:1024,height:1024});await page.goto(\"file://\"+tmpPath,{waitUntil:\"networkidle0\"});const buffer=await page.screenshot({type:\"jpeg\"});await browser.close();console.log(buffer.toString(\"base64\"));})();'`;\n\nreturn [{ json: { execCommandCode } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2020,
+        -600
+      ],
+      "id": "d653528e-850c-4c2a-b30f-186a75438530",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "stdout",
+        "binaryPropertyName": "=data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        2520,
+        -460
+      ],
+      "id": "876de966-697b-4683-8522-c01be66dcafd",
+      "name": "Convert to File",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "command": "rm -f /tmp/*.jpg /tmp/*.jpeg /tmp/*.png\n"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        2740,
+        -460
+      ],
+      "id": "cf902cc9-aada-40b1-98ff-8c0282db0fd4",
+      "name": "Execute Command1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "command": "ls -l /tmp/image_*\n"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        560,
+        -1540
+      ],
+      "id": "cad457a8-de63-438d-b787-69385bc9a57f",
+      "name": "Execute Command2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        800,
+        -360
+      ],
+      "id": "e6e5f126-2618-4303-ab1f-2413c34b134a",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me1",
+      "typeVersion": 1,
+      "position": [
+        3400,
+        60
+      ],
+      "id": "933a11e6-9249-4426-8b4f-40481706592c"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.imgbb.com/1/upload?key=8eab1369fa5f6be053179a6deacb7667",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "image",
+              "value": "={{ $json.stdout }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2980,
+        -460
+      ],
+      "id": "c239ec61-d654-44a7-ac6f-68063b302d4b",
+      "name": "Получаем ссылку IMGBB1",
+      "retryOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "11fPT5cgk_pImrA_nRBpAttQ9xQVmAOjU4R-2ia-BwBQ",
+          "mode": "list",
+          "cachedResultName": "СИЛА ДУМКИ | Психологія",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11fPT5cgk_pImrA_nRBpAttQ9xQVmAOjU4R-2ia-BwBQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 119165958,
+          "mode": "list",
+          "cachedResultName": "1. Всесвіт каже",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11fPT5cgk_pImrA_nRBpAttQ9xQVmAOjU4R-2ia-BwBQ/edit#gid=119165958"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        580,
+        -360
+      ],
+      "id": "2c669116-11e0-4bb6-9d66-1f8b16f23f18",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SVgQi4tJWBnpD656",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "11fPT5cgk_pImrA_nRBpAttQ9xQVmAOjU4R-2ia-BwBQ",
+          "mode": "list",
+          "cachedResultName": "СИЛА ДУМКИ | Психологія",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11fPT5cgk_pImrA_nRBpAttQ9xQVmAOjU4R-2ia-BwBQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 119165958,
+          "mode": "list",
+          "cachedResultName": "1. Всесвіт каже",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11fPT5cgk_pImrA_nRBpAttQ9xQVmAOjU4R-2ia-BwBQ/edit#gid=119165958"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Loop Over Items1').all()[0].json.row_number }}",
+            "Картинка": "={{ $json.data.url }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Итоговый пост",
+              "displayName": "Итоговый пост",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Заголовок для картинки",
+              "displayName": "Заголовок для картинки",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Картинка",
+              "displayName": "Картинка",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Тема",
+              "displayName": "Тема",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Краткое описание темы",
+              "displayName": "Краткое описание темы",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        3220,
+        -440
+      ],
+      "id": "71e42915-ee69-443c-88c8-b52a82b5c537",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SVgQi4tJWBnpD656",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "fbkingowner",
+    "name": "n8n-backup"
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataSuccessExecution": "all",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-09T12:30:57.831Z",
+  "versionId": "2f7c7a9f-9969-45db-809c-a33b9b1db93b"
+}
