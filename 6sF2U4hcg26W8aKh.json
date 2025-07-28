@@ -1,0 +1,421 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Execute Command1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Google Sheets6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets6": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets7": {
+      "main": [
+        [
+          {
+            "node": "Replace Me1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command1": {
+      "main": [
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        [
+          {
+            "node": "Получаем ссылку IMGBB1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Получаем ссылку IMGBB1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-05-23T17:29:00.523Z",
+  "id": "6sF2U4hcg26W8aKh",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "RDY//Generate_image_from_HTML_And_link TEST",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1140,
+        -940
+      ],
+      "id": "2f44a9af-86c6-4229-9727-ddc8231ca645",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -580,
+        -140
+      ],
+      "id": "eb84125c-d9d6-4c2c-8139-7457e5d24dcc",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E",
+          "mode": "list",
+          "cachedResultName": "Контент тестовый",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1360027198,
+          "mode": "list",
+          "cachedResultName": "!Категории",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit#gid=1360027198"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -800,
+        -140
+      ],
+      "id": "54bfa8de-5a9c-4a44-ab3b-15b6721eab9e",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SVgQi4tJWBnpD656",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E",
+          "mode": "list",
+          "cachedResultName": "Контент тестовый",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $json['Категории постов:'] }}",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -360,
+        -220
+      ],
+      "id": "fe87a3ef-980c-43e8-9dbc-e4940dcbb0ab",
+      "name": "Google Sheets6",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SVgQi4tJWBnpD656",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E",
+          "mode": "list",
+          "cachedResultName": "Контент тестовый",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $('Loop Over Items1').item.json['Категории постов:'] }}",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Google Sheets6').item.json.row_number }}",
+            "Текст": "=",
+            "Картинка": "={{ $json.data.url }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Текст",
+              "displayName": "Текст",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Картинка",
+              "displayName": "Картинка",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Тема",
+              "displayName": "Тема",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1840,
+        -220
+      ],
+      "id": "618701a0-abf4-4c2b-8811-f01996be696a",
+      "name": "Google Sheets7",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SVgQi4tJWBnpD656",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me1",
+      "typeVersion": 1,
+      "position": [
+        2020,
+        280
+      ],
+      "id": "a7de6966-3165-4ffb-8aa4-08e0ad973d23"
+    },
+    {
+      "parameters": {
+        "command": "=cat > /tmp/render-banner.js <<'EOF'\nconst puppeteer = require('puppeteer');\n\nconst html = `<!DOCTYPE html>\n<html lang='ru'>\n  <head>\n    <meta charset='UTF-8' />\n    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap' rel='stylesheet'>\n    <style>\n      html, body { margin: 0; padding: 0; }\n      .banner {\n        position: relative;\n        width: 1200px; \n        height: 630px;\n        background-image: url('https://i.ibb.co/KjH7tTvP/Chat-GPT-Image-30-2025-16-55-34.png');\n        background-size: cover;\n        background-position: center;\n        font-family: 'Montserrat', sans-serif;\n      }\n      .safe-area {\n        position: absolute;\n        top: 100px; \n        left: 10px;\n        width: 700px; \n        height: 330px;\n        padding: 20px; box-sizing: border-box;\n        display: flex; align-items: center; justify-content: center;\n      }\n      .text {\n        color: white; font-weight: 900;\n        text-align: center;\n        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);\n        display: inline-block;\n        width: 100%;\n        line-height: 1.1;\n        word-break: normal;\n        white-space: normal;\n      }\n    </style>\n  </head>\n  <body>\n    <div class='banner'>\n      <div class='safe-area'>\n        <div class='text' id='text'>\n          Хладнокровие - секрет \n        </div>\n      </div>\n    </div>\n    <script>\n      function fitText(elId, min = 10, max = 200) {\n        const el = document.getElementById(elId);\n        const container = el.parentElement;\n        let fontSize = min;\n        el.style.fontSize = fontSize + 'px';\n        while (el.scrollHeight <= container.clientHeight &&\n               el.scrollWidth <= container.clientWidth &&\n               fontSize < max) {\n          fontSize++;\n          el.style.fontSize = fontSize + 'px';\n        }\n        if (el.scrollHeight > container.clientHeight ||\n            el.scrollWidth > container.clientWidth) {\n          fontSize--;\n          el.style.fontSize = fontSize + 'px';\n        }\n      }\n      window.addEventListener('load', () => fitText('text'));\n    </script>\n  </body>\n</html>`;\n\n(async () => {\n  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });\n  const page = await browser.newPage();\n  await page.setViewport({ width: 1200, height: 630 });\n  const dataUri = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);\n  await page.goto(dataUri, { waitUntil: 'networkidle0' });\n  const buffer = await page.screenshot({ type: 'jpeg' }); \n  await browser.close(); \n\n  console.log(buffer.toString('base64'));\n})();\nEOF\n\nnode /tmp/render-banner.js\n"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        -220
+      ],
+      "id": "a1e75322-a970-45df-942b-5ab005baaf87",
+      "name": "Execute Command1",
+      "retryOnFail": true,
+      "alwaysOutputData": false,
+      "maxTries": 2,
+      "waitBetweenTries": 500,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "stdout",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1400,
+        -220
+      ],
+      "id": "473924f1-5a7f-4cd9-9851-17defb07e017",
+      "name": "Convert to File1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.imgbb.com/1/upload?key=8eab1369fa5f6be053179a6deacb7667",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "image",
+              "value": "={{ $('Execute Command1').item.json.stdout }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1620,
+        -220
+      ],
+      "id": "f23a04f4-be96-40aa-a06a-ee4950e6fb26",
+      "name": "Получаем ссылку IMGBB1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5f389553-5d23-4bce-9e0a-7b14d87ae1a9",
+              "leftValue": "={{ $json['Картинка'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -140,
+        -220
+      ],
+      "id": "0d1f108b-ce62-442f-b507-37c1f744b3b7",
+      "name": "If"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "fbkingowner",
+    "name": "n8n-backup"
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataSuccessExecution": "all",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-23T19:32:39.486Z",
+  "versionId": "223b42d6-39e4-4123-9177-b1618a85536e"
+}
