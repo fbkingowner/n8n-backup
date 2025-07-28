@@ -1,0 +1,528 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Google Sheets6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets6": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command1": {
+      "main": [
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        [
+          {
+            "node": "Получаем ссылку IMGBB1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Получаем ссылку IMGBB1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Execute Command1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets8": {
+      "main": [
+        [
+          {
+            "node": "Replace Me1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-02T11:20:24.330Z",
+  "id": "2a9jfX6WBZmcMcfu",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "RDY//Generate_image//Belov_ab",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1020,
+        -145
+      ],
+      "id": "2d965c6d-1d9f-4531-993f-aba4b347eb30",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -580,
+        -145
+      ],
+      "id": "d605585e-0f42-4c25-a76d-d519939c4caa",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Tu9ozcj63El79Zy6T-Gp4x3aKX8S3pEwouwGifCOw8E",
+          "mode": "list",
+          "cachedResultName": "Belov AI Agency // Контент",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Tu9ozcj63El79Zy6T-Gp4x3aKX8S3pEwouwGifCOw8E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1360027198,
+          "mode": "list",
+          "cachedResultName": "!Категории",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Tu9ozcj63El79Zy6T-Gp4x3aKX8S3pEwouwGifCOw8E/edit#gid=1360027198"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -800,
+        -145
+      ],
+      "id": "ed1bc008-7155-49ea-bc29-971cd10c021b",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SVgQi4tJWBnpD656",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Tu9ozcj63El79Zy6T-Gp4x3aKX8S3pEwouwGifCOw8E",
+          "mode": "list",
+          "cachedResultName": "Belov AI Agency // Контент",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Tu9ozcj63El79Zy6T-Gp4x3aKX8S3pEwouwGifCOw8E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $json['Категории постов:'] }}",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -360,
+        -220
+      ],
+      "id": "404023f4-b98b-476d-917c-eb8fab666e4e",
+      "name": "Google Sheets6",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SVgQi4tJWBnpD656",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me1",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        -145
+      ],
+      "id": "7f6d5c6e-fbed-40e6-a19c-e143d0e96287"
+    },
+    {
+      "parameters": {
+        "executeOnce": false,
+        "command": "={{ $json.selectedTemplate }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        740,
+        -220
+      ],
+      "id": "bf1791e4-0d6e-42b3-905b-8bd799234e08",
+      "name": "Execute Command1",
+      "retryOnFail": true,
+      "alwaysOutputData": false,
+      "maxTries": 2,
+      "waitBetweenTries": 500,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7a0ea773-2356-4f4c-a12c-f56d1078090c",
+              "name": "HTML1",
+              "value": "=cat > /tmp/render-banner.js <<'EOF'\nconst puppeteer = require('puppeteer');\n\nconst html = `<!DOCTYPE html>\n<html lang=\"ru\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>Адаптивный баннер</title>\n\n  <!-- Подключение шрифта Montserrat Black 900 -->\n  <link href=\"https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap\" rel=\"stylesheet\">\n\n  <style>\n    html, body {\n      margin: 0;\n      padding: 0;\n    }\n    .banner {\n      position: relative;\n      width: 1200px; \n      height: 630px;\n      background-image: url('https://i.ibb.co/mrtdcb6s/Chat-GPT-Image-1-2025-16-29-22.png');\n      background-size: cover;\n      background-position: center;\n      font-family: 'Montserrat', sans-serif;\n    }\n    .header-text {\n      position: absolute;\n      top: 30px;\n      width: 100%;\n      text-align: center;\n      color: white;\n      font-size: 35px;\n      font-weight: 900;\n      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);\n      line-height: 1.1;\n    }\n    .thin-text {\n      font-weight: 300; /* 👉 Тонкий стиль для слова \"Agency\" */\n    }\n    .safe-area {\n      position: absolute;\n      top: 150px; \n      left: 225px; \n      width: 700px; \n      height: 330px; \n      padding: 20px;\n      box-sizing: border-box;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n    }\n\t.text-background {\n        background-color: #382112; /* 👉 Цвет подложки */\n        border-radius: 25px;\n        padding: 20px 40px;\n        color: #f0dbb1;\n        font-weight: 900;\n        text-align: center;\n        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);\n        display: inline-block;\n        line-height: 1.1;\n        white-space: normal; /* ✅ позволяет переносить по пробелам */\n        word-break: normal;  /* ✅ запрещает ломать слово внутри */\n        overflow-wrap: break-word; /* ✅ переносит длинное слово, если оно не влезает */\n}\n  </style>\n</head>\n<body>\n  <div class=\"banner\">\n    <div class=\"header-text\">Belov AI<br><span class=\"thin-text\">Agency</span></div>\n    <div class=\"safe-area\">\n      <div class=\"text-background\" id=\"text\">\n        {{ $json.Text }}  <!-- 👉 Здесь меняй текст -->\n      </div>\n    </div>\n  </div>\n  <script>\n    function fitText(elId, min = 10, max = 200) {\n      const el = document.getElementById(elId);\n      const container = el.parentElement;\n      let fontSize = min;\n      el.style.fontSize = fontSize + \"px\";\n      while (\n        el.scrollHeight <= container.clientHeight &&\n        el.scrollWidth <= container.clientWidth &&\n        fontSize < max\n      ) {\n        fontSize++;\n        el.style.fontSize = fontSize + \"px\";\n      }\n      if (\n        el.scrollHeight > container.clientHeight ||\n        el.scrollWidth > container.clientWidth\n      ) {\n        fontSize--;\n        el.style.fontSize = fontSize + \"px\";\n      }\n    }\n    window.addEventListener(\"load\", () => fitText(\"text\"));\n    window.addEventListener(\"resize\", () => fitText(\"text\"));\n  </script>\n</body>\n</html>`;\n\n(async () => {\n  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });\n  const page = await browser.newPage();\n  await page.setViewport({ width: 1200, height: 630 });\n  const dataUri = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);\n  await page.goto(dataUri, { waitUntil: 'networkidle0' });\n  const buffer = await page.screenshot({ type: 'jpeg' }); \n  await browser.close(); \n\n  console.log(buffer.toString('base64'));\n})();\nEOF\n\nnode /tmp/render-banner.js\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        300,
+        -220
+      ],
+      "id": "eda7f763-413c-4f3c-be79-b7011b0e6690",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "stdout",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        960,
+        -220
+      ],
+      "id": "a06f7ae7-5f47-4065-8e52-d899d3cf481b",
+      "name": "Convert to File1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.imgbb.com/1/upload?key=8eab1369fa5f6be053179a6deacb7667",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "image",
+              "value": "={{ $('Execute Command1').item.json.stdout }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1180,
+        -220
+      ],
+      "id": "1adfba59-3aa2-4b4c-a00b-e42e184dc9e5",
+      "name": "Получаем ссылку IMGBB1"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  const htmlKeys = Object.keys(item.json).filter(k => k.startsWith(\"HTML\"));\n  const randomKey = htmlKeys[Math.floor(Math.random() * htmlKeys.length)];\n  const htmlCode = item.json[randomKey];\n\n  return {\n    json: {\n      selectedTemplate: htmlCode,\n      Text: item.json.Text // Сохраняем, если нужно для отладки\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        -220
+      ],
+      "id": "20e16f78-6807-46d4-8644-c76a40d1c227",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7a0ea773-2356-4f4c-a12c-f56d1078090c",
+              "name": "Text",
+              "value": "={{ $json['Заголовок для картинки'].toUpperCase() }}\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        80,
+        -220
+      ],
+      "id": "689a4f9e-807b-4721-98d8-8737bbb32e54",
+      "name": "Edit1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5f389553-5d23-4bce-9e0a-7b14d87ae1a9",
+              "leftValue": "={{ $json['Картинка'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -140,
+        -220
+      ],
+      "id": "214ea699-bb2b-4e42-b2f8-59b055d0270f",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1Tu9ozcj63El79Zy6T-Gp4x3aKX8S3pEwouwGifCOw8E",
+          "mode": "list",
+          "cachedResultName": "Belov AI Agency // Контент",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Tu9ozcj63El79Zy6T-Gp4x3aKX8S3pEwouwGifCOw8E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $('Loop Over Items1').item.json['Категории постов:'] }}",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Google Sheets6').item.json.row_number }}",
+            "Текст": "=",
+            "Картинка": "={{ $json.data.url }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Текст",
+              "displayName": "Текст",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Картинка",
+              "displayName": "Картинка",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Тема",
+              "displayName": "Тема",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1400,
+        -220
+      ],
+      "id": "a2740dc0-b837-4703-bdca-9ed108ba15b6",
+      "name": "Google Sheets8",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SVgQi4tJWBnpD656",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "fbkingowner",
+    "name": "n8n-backup"
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataSuccessExecution": "all",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-07-02T11:20:04.402Z",
+      "updatedAt": "2025-07-02T11:20:04.402Z",
+      "id": "2JKDOKoAiNPlGzBc",
+      "name": "BelovAI"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-03T13:31:44.804Z",
+  "versionId": "b6fd7a55-1d59-4df1-9674-2c86442ecad5"
+}
