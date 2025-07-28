@@ -1,0 +1,428 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "DATA BASE",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DATA BASE": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "DATA_ABOUT",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4o-mini": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "DATA_ABOUT",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DATA_ABOUT": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets4": {
+      "main": [
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-13T16:06:32.240Z",
+  "id": "W7EWtqe7fDWyTXhc",
+  "isArchived": false,
+  "meta": null,
+  "name": "//CONTENT_Описание проекта",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ae424b32-2fdc-49a7-955b-d169914f8af1",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E",
+          "mode": "list",
+          "cachedResultName": "Контент тестовый",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1360027198,
+          "mode": "list",
+          "cachedResultName": "!Категории",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit#gid=1360027198"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        260,
+        0
+      ],
+      "id": "9f23baab-401a-4beb-ac3e-bdc369333967",
+      "name": "Google Sheets"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        480,
+        0
+      ],
+      "id": "4079e53f-1aeb-40c7-b0a9-a2164fdc31bf",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        2540,
+        620
+      ],
+      "id": "1bcde1f3-ecff-4b8e-a031-5dfff144d414"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Возьми вот эту категорию постов {{ $json['Категории постов:'] }}",
+        "options": {
+          "systemMessage": "Ты существуешь, чтобы генерировать новые темы для контента в телеграм канал с покером.\nТвоя задача сгенерировать 10 актуальных и интересных тем для постов используя свою память\n\nВАЖНО! Ты обязательно должен обратиться сначала к базе данных(называется БД_ОПИСАНИЕ), где указано описание проекта, для которого ты будешь генерировать темы. А потом ты обратишься к базе TOPICS_DATA, чтобы ты не генерировал одинаковые темы.\n\nГенерируй темы в формате:\n1. Здесь Тема 1\n2. Здесь Тема 2"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        760,
+        20
+      ],
+      "id": "a6a9a06a-bc9b-447e-9ca0-931c2d1320ab",
+      "name": "AI Agent",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        620,
+        180
+      ],
+      "id": "f35b47e8-6bc3-4fa3-81cc-5d04ee4182aa",
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1080,
+        500
+      ],
+      "id": "17655733-4381-4de6-8071-1a848cebd201",
+      "name": "Embeddings OpenAI"
+    },
+    {
+      "parameters": {
+        "tableName": {
+          "__rl": true,
+          "value": "poker",
+          "mode": "list",
+          "cachedResultName": "poker"
+        },
+        "options": {
+          "queryName": "match_poker"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1,
+      "position": [
+        680,
+        360
+      ],
+      "id": "69a68f31-497e-4b5d-a84e-c1a2d95c57c9",
+      "name": "DATA BASE"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1140,
+        340
+      ],
+      "id": "faf3d9b3-957d-4296-a148-400e1f86ac56",
+      "name": "4o-mini"
+    },
+    {
+      "parameters": {
+        "name": "poker",
+        "description": "The vector store contains key information about the Telegram channel project, including its goals, objectives, content categories, and previously used post topics. It is used to generate unique ideas for new posts while preventing duplication of already published content, helping to optimize the posting strategy. The store analyzes the project description and past post data to create relevant and engaging topics, improving content quality and attracting new subscribers.",
+        "topK": "=30"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [
+        980,
+        220
+      ],
+      "id": "3f99a1f9-03f3-4bd0-900a-5b7de5af04ed",
+      "name": "DATA_ABOUT"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3d7af44d-0b03-4eff-885c-0375b57ad98c",
+              "name": "themes",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "0eb4d79f-64fe-4e60-9b29-8eb8411ddee9",
+              "name": "category",
+              "value": "={{ $('Loop Over Items').item.json['Категории постов:'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1160,
+        20
+      ],
+      "id": "08af2e23-8a59-4a53-ade2-9883820f537f",
+      "name": "Edit Fields",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E",
+          "mode": "list",
+          "cachedResultName": "Контент тестовый",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $json.category }}",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Тема": "={{ $json.theme }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Текст",
+              "displayName": "Текст",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Картинка",
+              "displayName": "Картинка",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Тема",
+              "displayName": "Тема",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1520,
+        20
+      ],
+      "id": "89648e26-bc5c-4f55-8e16-849de09692be",
+      "name": "Google Sheets4"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "fbkingowner",
+    "name": "n8n-backup"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-13T16:06:32.240Z",
+  "versionId": "656a13b0-0279-4848-be00-f1c9cff39324"
+}
