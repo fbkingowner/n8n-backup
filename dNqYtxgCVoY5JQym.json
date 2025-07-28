@@ -1,0 +1,373 @@
+{
+  "active": false,
+  "connections": {
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Google Sheets4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets4": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets5": {
+      "main": [
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-03T13:32:02.297Z",
+  "id": "dNqYtxgCVoY5JQym",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "//СИЛА ДУМКИ",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        640,
+        0
+      ],
+      "id": "b058d42e-444c-4c84-9bd8-56c4edc7cbc1",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        3300,
+        800
+      ],
+      "id": "919720c8-ffec-42c3-992c-7efea5343733"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "11fPT5cgk_pImrA_nRBpAttQ9xQVmAOjU4R-2ia-BwBQ",
+          "mode": "list",
+          "cachedResultName": "СИЛА ДУМКИ | Психологія",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11fPT5cgk_pImrA_nRBpAttQ9xQVmAOjU4R-2ia-BwBQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1360027198,
+          "mode": "list",
+          "cachedResultName": "!Категории",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11fPT5cgk_pImrA_nRBpAttQ9xQVmAOjU4R-2ia-BwBQ/edit#gid=1360027198"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        300,
+        0
+      ],
+      "id": "fe100e53-c462-47fb-ac30-0ebea54c3b16",
+      "name": "Google Sheets3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SVgQi4tJWBnpD656",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "11fPT5cgk_pImrA_nRBpAttQ9xQVmAOjU4R-2ia-BwBQ",
+          "mode": "list",
+          "cachedResultName": "СИЛА ДУМКИ | Психологія",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11fPT5cgk_pImrA_nRBpAttQ9xQVmAOjU4R-2ia-BwBQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $json['Категории постов:'] }}",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        980,
+        20
+      ],
+      "id": "cbeae9e7-404e-49e3-a423-5af297849279",
+      "name": "Google Sheets4",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SVgQi4tJWBnpD656",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Loop Over Items').item.json['Промты'] }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        1560,
+        80
+      ],
+      "id": "3214ab94-d96d-4249-9fd7-1b46af4059fd",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "11fPT5cgk_pImrA_nRBpAttQ9xQVmAOjU4R-2ia-BwBQ",
+          "mode": "list",
+          "cachedResultName": "СИЛА ДУМКИ | Психологія",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11fPT5cgk_pImrA_nRBpAttQ9xQVmAOjU4R-2ia-BwBQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $('Loop Over Items').item.json['Категории постов:'] }}",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Google Sheets4').item.json.row_number }}",
+            "Итоговый пост": "={{ $json.output }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Итоговый пост",
+              "displayName": "Итоговый пост",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Заголовок для картинки",
+              "displayName": "Заголовок для картинки",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Картинка",
+              "displayName": "Картинка",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Тема",
+              "displayName": "Тема",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Краткое описание темы",
+              "displayName": "Краткое описание темы",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2200,
+        80
+      ],
+      "id": "8e810215-2218-4a5f-a7c4-eb79dde45b59",
+      "name": "Google Sheets5",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SVgQi4tJWBnpD656",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        60,
+        0
+      ],
+      "id": "0ece7b3f-39f8-43c9-9b39-fb9831b01986",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1320,
+        420
+      ],
+      "id": "8a09d681-98ef-48b1-8312-d51ca9d4d8a5",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "RVMEzwEKlDqxvA8Z",
+          "name": "OpenAi account"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "fbkingowner",
+    "name": "n8n-backup"
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataSuccessExecution": "all",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-03T17:15:30.460Z",
+  "versionId": "9e103864-a1ea-41d0-a692-6f7428089365"
+}
