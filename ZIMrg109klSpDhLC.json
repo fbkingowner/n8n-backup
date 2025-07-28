@@ -1,0 +1,169 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-13T16:05:48.861Z",
+  "id": "ZIMrg109klSpDhLC",
+  "isArchived": false,
+  "meta": null,
+  "name": "//CONTENT_0_Генерация листов с названием рубрик",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7f6c7cc0-6daa-4594-910c-de1f024f0127",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "documentId": {
+          "__rl": true,
+          "value": "1kueRVwgPxSdAATt9-QB0CZyXCS5txofXADyRzAo6JKc",
+          "mode": "list",
+          "cachedResultName": "Генерация листов",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kueRVwgPxSdAATt9-QB0CZyXCS5txofXADyRzAo6JKc/edit?usp=drivesdk"
+        },
+        "title": "={{ $('Google Sheets1').item.json['Категории постов:'] }}",
+        "options": {
+          "rightToLeft": false,
+          "index": 0
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        740,
+        80
+      ],
+      "id": "02665f2c-403c-45c1-80c0-3ed14a74a5a3",
+      "name": "Google Sheets"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1kueRVwgPxSdAATt9-QB0CZyXCS5txofXADyRzAo6JKc",
+          "mode": "list",
+          "cachedResultName": "Генерация листов",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kueRVwgPxSdAATt9-QB0CZyXCS5txofXADyRzAo6JKc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "!Категории",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kueRVwgPxSdAATt9-QB0CZyXCS5txofXADyRzAo6JKc/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        240,
+        0
+      ],
+      "id": "b80fd370-59e9-428d-99f8-792bb01a0e05",
+      "name": "Google Sheets1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        460,
+        0
+      ],
+      "id": "0c9fcecc-3d93-4afb-b217-10f15eaa1f9d",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        320
+      ],
+      "id": "11fa4acb-6925-49cf-a721-8483ae44327b"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "fbkingowner",
+    "name": "n8n-backup"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-13T16:05:48.861Z",
+  "versionId": "a81dd26d-d40c-47af-a1a8-953e6b9d2fdb"
+}
