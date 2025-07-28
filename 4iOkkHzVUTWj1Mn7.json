@@ -1,0 +1,418 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Отправка фото+текст в канал",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Отправка сообщений в телеграм",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Отправка сообщений в телеграм": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Отправка фото+текст в канал": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets1": {
+      "main": [
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-13T16:04:30.807Z",
+  "id": "4iOkkHzVUTWj1Mn7",
+  "isArchived": false,
+  "meta": null,
+  "name": "//SENDING_Публикация+проверка на отправленность",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -880,
+        180
+      ],
+      "id": "af8fab31-f49d-4b1e-af80-158ecbee9b03",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1diyihm8mnAh7hqk_Bdi3dHMkkcCfeW2JVPyWJ9I0Uis",
+          "mode": "list",
+          "cachedResultName": "Контент тестовый",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1diyihm8mnAh7hqk_Bdi3dHMkkcCfeW2JVPyWJ9I0Uis/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 531202730,
+          "mode": "list",
+          "cachedResultName": "Контент",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1diyihm8mnAh7hqk_Bdi3dHMkkcCfeW2JVPyWJ9I0Uis/edit#gid=531202730"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -660,
+        180
+      ],
+      "id": "8cbbd51a-ca17-42a1-ae02-fb5ac739472f",
+      "name": "Google Sheets"
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -440,
+        180
+      ],
+      "id": "e3fcd108-153a-4f28-9181-fa2e3219d2c2",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        880,
+        180
+      ],
+      "id": "ba88892b-58c9-43ce-8096-d805b0b131a1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "db213c74-d213-4787-9050-7a3a4d58bd92",
+              "leftValue": "={{ $json['photo_url'] }}",
+              "rightValue": "is not empty",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -220,
+        100
+      ],
+      "id": "26539fad-f018-4590-9f4d-e928d8cfa4ff",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "url": "https://api.telegram.org/bot8043311483:AAEtbmGRUSDTUfjBhJm4Cf3vooDrmhnsfls/sendMessage",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "chat_id",
+              "value": "-1002613932779"
+            },
+            {
+              "name": "text",
+              "value": "={{ $json.message }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        200
+      ],
+      "id": "44ec85a2-104e-4ead-90a6-66c0666b46ab",
+      "name": "Отправка сообщений в телеграм"
+    },
+    {
+      "parameters": {
+        "url": "https://api.telegram.org/bot8043311483:AAEtbmGRUSDTUfjBhJm4Cf3vooDrmhnsfls/sendPhoto",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "chat_id",
+              "value": "-1002613932779"
+            },
+            {
+              "name": "photo",
+              "value": "={{ $json['photo_url'] }}"
+            },
+            {
+              "name": "caption",
+              "value": "={{ $json.message }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "39e0a3e9-f7e3-4259-9cd7-20df7f6c769c",
+      "name": "Отправка фото+текст в канал"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.1,
+      "position": [
+        220,
+        100
+      ],
+      "id": "fe5e01a6-c857-44ee-986d-321708237cb0",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "amount": 60
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        440,
+        100
+      ],
+      "id": "b65c135d-6e03-4f51-8e4c-3f04d62daa43",
+      "name": "Wait",
+      "webhookId": "3d953b9d-1d09-49af-b937-c64c8bc549e6"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1diyihm8mnAh7hqk_Bdi3dHMkkcCfeW2JVPyWJ9I0Uis",
+          "mode": "list",
+          "cachedResultName": "Контент тестовый",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1diyihm8mnAh7hqk_Bdi3dHMkkcCfeW2JVPyWJ9I0Uis/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 531202730,
+          "mode": "list",
+          "cachedResultName": "Контент",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1diyihm8mnAh7hqk_Bdi3dHMkkcCfeW2JVPyWJ9I0Uis/edit#gid=531202730"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "Sent",
+            "row_number": "={{ $('Google Sheets').item.json.row_number }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "photo_url",
+              "displayName": "photo_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        660,
+        100
+      ],
+      "id": "56c001ac-520e-40f7-8475-1912f3f83cf4",
+      "name": "Google Sheets1"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "fbkingowner",
+    "name": "n8n-backup"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-13T16:04:30.807Z",
+  "versionId": "a81d225b-606a-45b3-8011-730ee801a10c"
+}
