@@ -1,0 +1,549 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command1": {
+      "main": [
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        [
+          {
+            "node": "Получаем ссылку IMGBB1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Получаем ссылку IMGBB1": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Execute Command1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Replace Me1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Replace Me1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-13T16:05:16.265Z",
+  "id": "QoAkpauIIrZUtOQy",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "RDY//Generate_image_from_HTML_And_link",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1020,
+        -140
+      ],
+      "id": "ed5a8470-554d-49df-b889-0ae9f63bf019",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -580,
+        -140
+      ],
+      "id": "410eb326-357b-4e42-ae3c-6d0a09e479b9",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me1",
+      "typeVersion": 1,
+      "position": [
+        2020,
+        280
+      ],
+      "id": "bfa8b030-d5f8-46b9-97e8-1a3effb60f35"
+    },
+    {
+      "parameters": {
+        "executeOnce": false,
+        "command": "={{ $json.selectedTemplate }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        -220
+      ],
+      "id": "9bcec669-7661-425d-b93f-e821f21ee0c6",
+      "name": "Execute Command1",
+      "retryOnFail": true,
+      "alwaysOutputData": false,
+      "maxTries": 2,
+      "waitBetweenTries": 500,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7a0ea773-2356-4f4c-a12c-f56d1078090c",
+              "name": "HTML1",
+              "value": "=cat > /tmp/render-banner.js <<'EOF'\nconst puppeteer = require('puppeteer');\n\nconst html = `<!DOCTYPE html>\n<html lang='ru'>\n  <head>\n    <meta charset='UTF-8' />\n    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap' rel='stylesheet'>\n    <style>\n      html, body { margin: 0; padding: 0; }\n      .banner {\n        position: relative;\n        width: 1200px; \n        height: 630px;\n        background-image: url('https://i.ibb.co/KjH7tTvP/Chat-GPT-Image-30-2025-16-55-34.png');\n        background-size: cover;\n        background-position: center;\n        font-family: 'Montserrat', sans-serif;\n      }\n      .safe-area {\n        position: absolute;\n        top: 100px; \n        left: 10px;\n        width: 700px; \n        height: 330px;\n        padding: 20px; box-sizing: border-box;\n        display: flex; align-items: center; justify-content: center;\n      }\n      .text {\n        color: white; font-weight: 900;\n        text-align: center;\n        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);\n        display: inline-block;\n        width: 100%;\n        line-height: 1.1;\n        word-break: normal;\n        white-space: normal;\n      }\n    </style>\n  </head>\n  <body>\n    <div class='banner'>\n      <div class='safe-area'>\n        <div class='text' id='text'>\n          {{ $json.Text }} \n        </div>\n      </div>\n    </div>\n    <script>\n      function fitText(elId, min = 10, max = 200) {\n        const el = document.getElementById(elId);\n        const container = el.parentElement;\n        let fontSize = min;\n        el.style.fontSize = fontSize + 'px';\n        while (el.scrollHeight <= container.clientHeight &&\n               el.scrollWidth <= container.clientWidth &&\n               fontSize < max) {\n          fontSize++;\n          el.style.fontSize = fontSize + 'px';\n        }\n        if (el.scrollHeight > container.clientHeight ||\n            el.scrollWidth > container.clientWidth) {\n          fontSize--;\n          el.style.fontSize = fontSize + 'px';\n        }\n      }\n      window.addEventListener('load', () => fitText('text'));\n    </script>\n  </body>\n</html>`;\n\n(async () => {\n  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });\n  const page = await browser.newPage();\n  await page.setViewport({ width: 1200, height: 630 });\n  const dataUri = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);\n  await page.goto(dataUri, { waitUntil: 'networkidle0' });\n  const buffer = await page.screenshot({ type: 'jpeg' }); \n  await browser.close(); \n\n  console.log(buffer.toString('base64'));\n})();\nEOF\n\nnode /tmp/render-banner.js\n",
+              "type": "string"
+            },
+            {
+              "id": "e42f284c-7ec9-4e6e-a71b-e7cee351dcbb",
+              "name": "HTML2",
+              "value": "=cat > /tmp/render-banner.js <<'EOF'\nconst puppeteer = require('puppeteer');\n\nconst html = `<!DOCTYPE html>\n<html lang='ru'>\n  <head>\n    <meta charset='UTF-8' />\n    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap' rel='stylesheet'>\n    <style>\n      html, body { margin: 0; padding: 0; }\n      .banner {\n        position: relative;\n        width: 1200px; \n        height: 630px;\n        background-image: url('https://i.ibb.co/0825Lqw/Chat-GPT-Image-1-2025-22-05-04.png');\n        background-size: cover;\n        background-position: center;\n        font-family: 'Montserrat', sans-serif;\n      }\n      .safe-area {\n        position: absolute;\n        top: 100px; \n        left: 225px;\n        width: 700px; \n        height: 330px;\n        padding: 20px; box-sizing: border-box;\n        display: flex; align-items: center; justify-content: center;\n      }\n      .text {\n        color: white; font-weight: 900;\n        text-align: center;\n        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);\n        display: inline-block;\n        width: 100%;\n        line-height: 1.1;\n        word-break: normal;\n        white-space: normal;\n      }\n    </style>\n  </head>\n  <body>\n    <div class='banner'>\n      <div class='safe-area'>\n        <div class='text' id='text'>\n          {{ $json.Text }} \n        </div>\n      </div>\n    </div>\n    <script>\n      function fitText(elId, min = 10, max = 200) {\n        const el = document.getElementById(elId);\n        const container = el.parentElement;\n        let fontSize = min;\n        el.style.fontSize = fontSize + 'px';\n        while (el.scrollHeight <= container.clientHeight &&\n               el.scrollWidth <= container.clientWidth &&\n               fontSize < max) {\n          fontSize++;\n          el.style.fontSize = fontSize + 'px';\n        }\n        if (el.scrollHeight > container.clientHeight ||\n            el.scrollWidth > container.clientWidth) {\n          fontSize--;\n          el.style.fontSize = fontSize + 'px';\n        }\n      }\n      window.addEventListener('load', () => fitText('text'));\n    </script>\n  </body>\n</html>`;\n\n(async () => {\n  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });\n  const page = await browser.newPage();\n  await page.setViewport({ width: 1200, height: 630 });\n  const dataUri = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);\n  await page.goto(dataUri, { waitUntil: 'networkidle0' });\n  const buffer = await page.screenshot({ type: 'jpeg' }); \n  await browser.close(); \n\n  console.log(buffer.toString('base64'));\n})();\nEOF\n\nnode /tmp/render-banner.js\n",
+              "type": "string"
+            },
+            {
+              "id": "48163287-4108-44c0-8cc3-08b8706ee4f0",
+              "name": "HTML3",
+              "value": "=cat > /tmp/render-banner.js <<'EOF'\nconst puppeteer = require('puppeteer');\n\nconst html = `<!DOCTYPE html>\n<html lang='ru'>\n  <head>\n    <meta charset='UTF-8' />\n    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap' rel='stylesheet'>\n    <style>\n      html, body { margin: 0; padding: 0; }\n      .banner {\n        position: relative;\n        width: 1200px; \n        height: 630px;\n        background-image: url('https://i.ibb.co/xKts7Pmf/Chat-GPT-Image-1-2025-22-01-27.png');\n        background-size: cover;\n        background-position: center;\n        font-family: 'Montserrat', sans-serif;\n      }\n      .safe-area {\n        position: absolute;\n        top: 100px; \n        left: 225px;\n        width: 700px; \n        height: 330px;\n        padding: 20px; box-sizing: border-box;\n        display: flex; align-items: center; justify-content: center;\n      }\n      .text {\n        color: white; font-weight: 900;\n        text-align: center;\n        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);\n        display: inline-block;\n        width: 100%;\n        line-height: 1.1;\n        word-break: normal;\n        white-space: normal;\n      }\n    </style>\n  </head>\n  <body>\n    <div class='banner'>\n      <div class='safe-area'>\n        <div class='text' id='text'>\n          {{ $json.Text }} \n        </div>\n      </div>\n    </div>\n    <script>\n      function fitText(elId, min = 10, max = 200) {\n        const el = document.getElementById(elId);\n        const container = el.parentElement;\n        let fontSize = min;\n        el.style.fontSize = fontSize + 'px';\n        while (el.scrollHeight <= container.clientHeight &&\n               el.scrollWidth <= container.clientWidth &&\n               fontSize < max) {\n          fontSize++;\n          el.style.fontSize = fontSize + 'px';\n        }\n        if (el.scrollHeight > container.clientHeight ||\n            el.scrollWidth > container.clientWidth) {\n          fontSize--;\n          el.style.fontSize = fontSize + 'px';\n        }\n      }\n      window.addEventListener('load', () => fitText('text'));\n    </script>\n  </body>\n</html>`;\n\n(async () => {\n  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });\n  const page = await browser.newPage();\n  await page.setViewport({ width: 1200, height: 630 });\n  const dataUri = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);\n  await page.goto(dataUri, { waitUntil: 'networkidle0' });\n  const buffer = await page.screenshot({ type: 'jpeg' }); \n  await browser.close(); \n\n  console.log(buffer.toString('base64'));\n})();\nEOF\n\nnode /tmp/render-banner.js\n",
+              "type": "string"
+            },
+            {
+              "id": "3e6aa1ff-634c-4289-93ca-b68da99b4ac3",
+              "name": "HTML4",
+              "value": "=cat > /tmp/render-banner.js <<'EOF'\nconst puppeteer = require('puppeteer');\n\nconst html = `<!DOCTYPE html>\n<html lang='ru'>\n  <head>\n    <meta charset='UTF-8' />\n    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap' rel='stylesheet'>\n    <style>\n      html, body { margin: 0; padding: 0; }\n      .banner {\n        position: relative;\n        width: 1200px; \n        height: 630px;\n        background-image: url('https://i.ibb.co/0RLmLzMH/Chat-GPT-Image-2-2025-10-42-08.png');\n        background-size: cover;\n        background-position: center;\n        font-family: 'Montserrat', sans-serif;\n      }\n      .safe-area {\n        position: absolute;\n        top: 100px; \n        left: 225px;\n        width: 700px; \n        height: 330px;\n        padding: 20px; box-sizing: border-box;\n        display: flex; align-items: center; justify-content: center;\n      }\n      .text {\n        color: white; font-weight: 900;\n        text-align: center;\n        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);\n        display: inline-block;\n        width: 100%;\n        line-height: 1.1;\n        word-break: normal;\n        white-space: normal;\n      }\n    </style>\n  </head>\n  <body>\n    <div class='banner'>\n      <div class='safe-area'>\n        <div class='text' id='text'>\n          {{ $json.Text }} \n        </div>\n      </div>\n    </div>\n    <script>\n      function fitText(elId, min = 10, max = 200) {\n        const el = document.getElementById(elId);\n        const container = el.parentElement;\n        let fontSize = min;\n        el.style.fontSize = fontSize + 'px';\n        while (el.scrollHeight <= container.clientHeight &&\n               el.scrollWidth <= container.clientWidth &&\n               fontSize < max) {\n          fontSize++;\n          el.style.fontSize = fontSize + 'px';\n        }\n        if (el.scrollHeight > container.clientHeight ||\n            el.scrollWidth > container.clientWidth) {\n          fontSize--;\n          el.style.fontSize = fontSize + 'px';\n        }\n      }\n      window.addEventListener('load', () => fitText('text'));\n    </script>\n  </body>\n</html>`;\n\n(async () => {\n  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });\n  const page = await browser.newPage();\n  await page.setViewport({ width: 1200, height: 630 });\n  const dataUri = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);\n  await page.goto(dataUri, { waitUntil: 'networkidle0' });\n  const buffer = await page.screenshot({ type: 'jpeg' }); \n  await browser.close(); \n\n  console.log(buffer.toString('base64'));\n})();\nEOF\n\nnode /tmp/render-banner.js\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        300,
+        -220
+      ],
+      "id": "631d668d-b3ff-49b7-9520-f4ac48fbea6b",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "stdout",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1400,
+        -220
+      ],
+      "id": "673452cc-904f-45f0-a50e-32ec61c5c498",
+      "name": "Convert to File1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.imgbb.com/1/upload?key=8eab1369fa5f6be053179a6deacb7667",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "image",
+              "value": "={{ $('Execute Command1').item.json.stdout }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1620,
+        -220
+      ],
+      "id": "937607bd-4a6e-409c-ab71-cb543d6a0c00",
+      "name": "Получаем ссылку IMGBB1",
+      "retryOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  const htmlKeys = Object.keys(item.json).filter(k => k.startsWith(\"HTML\"));\n  const randomKey = htmlKeys[Math.floor(Math.random() * htmlKeys.length)];\n  const htmlCode = item.json[randomKey];\n\n  return {\n    json: {\n      selectedTemplate: htmlCode,\n      Text: item.json.Text // Сохраняем, если нужно для отладки\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        -220
+      ],
+      "id": "d0e4f073-d35a-4327-b18b-be229de15bfd",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7a0ea773-2356-4f4c-a12c-f56d1078090c",
+              "name": "Text",
+              "value": "={{ $json['Заголовок для картинки'].toUpperCase() }}\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        100,
+        -220
+      ],
+      "id": "926acda2-86fb-4603-8ef6-df05feac01aa",
+      "name": "Edit1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5f389553-5d23-4bce-9e0a-7b14d87ae1a9",
+              "leftValue": "={{ $json['Картинка'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -140,
+        -220
+      ],
+      "id": "e67b1f98-5b35-483e-932c-10aab12adcf9",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E",
+          "mode": "list",
+          "cachedResultName": "Контент // 4Poker",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1360027198,
+          "mode": "list",
+          "cachedResultName": "!Категории",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit#gid=1360027198"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -800,
+        -140
+      ],
+      "id": "1dbcd308-a13c-4d2d-9e01-db72100a3ef6",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SVgQi4tJWBnpD656",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E",
+          "mode": "list",
+          "cachedResultName": "Контент // 4Poker",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $json['Категории постов:'] }}",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -360,
+        -220
+      ],
+      "id": "9947a957-985c-4570-864d-8343cbadb67b",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SVgQi4tJWBnpD656",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E",
+          "mode": "list",
+          "cachedResultName": "Контент // 4Poker",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $('Loop Over Items1').item.json['Категории постов:'] }}",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Get row(s) in sheet1').item.json.row_number }}",
+            "Текст": "=",
+            "Картинка": "={{ $json.data.url }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Текст",
+              "displayName": "Текст",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Картинка",
+              "displayName": "Картинка",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Тема",
+              "displayName": "Тема",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1840,
+        -220
+      ],
+      "id": "3480be4e-a7ad-494f-b758-e5937054b4d7",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SVgQi4tJWBnpD656",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "fbkingowner",
+    "name": "n8n-backup"
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataSuccessExecution": "all",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-08T07:56:56.052Z",
+  "versionId": "a2e5435e-017f-47bc-95c8-2a0b4857bb48"
+}
