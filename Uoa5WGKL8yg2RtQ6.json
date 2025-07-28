@@ -1,0 +1,728 @@
+{
+  "active": false,
+  "connections": {
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "DATA BASE",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DATA BASE": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "poker",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4o-mini": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "poker",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI2": {
+      "ai_embedding": [
+        [
+          {
+            "node": "TOPICS1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "TOPICS1": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "topics",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets4": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store2": {
+      "main": [
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI5": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store2",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader2": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store2",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "topics": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.1-nano2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "topics",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4.1-nano1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader2",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-13T16:08:26.138Z",
+  "id": "Uoa5WGKL8yg2RtQ6",
+  "isArchived": false,
+  "meta": null,
+  "name": "Генерируем темы v2.0",
+  "nodes": [
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E",
+          "mode": "list",
+          "cachedResultName": "Контент тестовый",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1360027198,
+          "mode": "list",
+          "cachedResultName": "!Категории",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit#gid=1360027198"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -360,
+        660
+      ],
+      "id": "4ba54854-b6b5-4a1c-b294-ffc7f9b08b13",
+      "name": "Google Sheets"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -60,
+        660
+      ],
+      "id": "e71b4dfc-0a7b-45f0-91fc-379becc1a8d4",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        2440,
+        1280
+      ],
+      "id": "f7c8cc26-7f83-42c0-8c8d-6337dc16637a"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=ПРОМТ ДЛЯ ТЕМ:\n\n#Роль\nТы — элитный стратег контент-маркетинга с опытом создания вирусного контента для топовых телеграм-каналов в 2025 году.\nТвоя задача — Разработать 5 инновационных тем для категории:\n{{ $json['Категории постов:'] }}\nКраткое описание категории: {{ $json['Описание'] }}\nОбщий тон канала: [информативный/развлекательный/образовательный\n\n#Критерии качества\n- Уникальность: каждая тема проверяется через векторную базу данных Topics\n- Отклоняй темы с семантическим сходством >90% с существующими\n- Виральность: потенциал для высокой вовлеченности и шеринга\n- Ценность: решение конкретных проблем или удовлетворение потребностей аудитории\n\n#Важно:\nПеред добавлением каждой темы проверь, есть ли уже похожая тема в векторной базе данных Topics, к которой ты имеешь доступ.\nПохожая тема — это такая, что имеет значительное сходство по смыслу с уже существующими темами, даже если текст отличается.\nЕсли тема уже существует или слишком похожа — генерируй другую тему. Пожалуйста, избегай повторов по смыслу.\n\n#Примеры\n✓ Отличный заголовок: \"7 скрытых функций нейросетей, о которых молчат разработчики\"\n✗ Слабый заголовок: \"Интересные факты о нейросетях\"\n\n#Структура_ответа\nДля каждой темы создай:\n1. Тема — яркий, привлекательный заголовок поста, который точно отражает суть. \n- Включи числа, вопросы или интригу/\n- Используй эмоционально заряженные слова\n- Обещай конкретный результат/выгоду\n2. Краткое описание (концепция поста) — чёткое, информативное пояснение, которое даст следующему ИИ агенту полный контекст: о чём должен быть пост, что важно раскрыть, какие ключевые идеи или подходы следует включить.\n3. Текст для баннера — короткая фраза (до 5–6 слов), отображающая основную идею поста, подходящая для визуального баннера. Эмоциональный триггер\n\nОтвет верни строго в формате JSON-массива, например:\n\n[\n  {\n    \"тема\": \"Как ИИ меняет маркетинг\",\n    \"описание\": \"Пост расскажет, как компании используют ИИ для персонализации и автоматизации маркетинга.\",\n    \"баннер\": \"ИИ в маркетинге\"\n  },\n  ...\n]",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        220,
+        680
+      ],
+      "id": "c465954d-761d-43ab-9633-7f11b5f40d46",
+      "name": "AI Agent",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1020,
+        1220
+      ],
+      "id": "d8130754-3792-46e4-b47e-c5e38a1d2f5c",
+      "name": "Embeddings OpenAI"
+    },
+    {
+      "parameters": {
+        "tableName": {
+          "__rl": true,
+          "value": "poker",
+          "mode": "list",
+          "cachedResultName": "poker"
+        },
+        "options": {
+          "queryName": "match_poker"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1,
+      "position": [
+        620,
+        1080
+      ],
+      "id": "59cccfa7-34cf-4d3e-a641-7914c19cdc8b",
+      "name": "DATA BASE"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-nano",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-nano"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1120,
+        1020
+      ],
+      "id": "a0613b3c-81bb-45ab-ab88-b41808e62364",
+      "name": "4o-mini"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        340,
+        1240
+      ],
+      "id": "be5dc0d8-d343-4c70-91b2-0b23348ea0bf",
+      "name": "Embeddings OpenAI2"
+    },
+    {
+      "parameters": {
+        "tableName": {
+          "__rl": true,
+          "value": "topics",
+          "mode": "list",
+          "cachedResultName": "topics"
+        },
+        "options": {
+          "queryName": "match_topics"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.1,
+      "position": [
+        140,
+        1080
+      ],
+      "id": "4f08bfe9-de99-43f4-b690-c2377da46a71",
+      "name": "TOPICS1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -700,
+        660
+      ],
+      "id": "e6fc108f-3151-4500-b315-d7c2c8e8d8b9",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E",
+          "mode": "list",
+          "cachedResultName": "//Контент тестовый",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1BANxMibwyT4rAO0QEzo4FsaQzfneIlEqrxHrJzvmV5E/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $('Loop Over Items').item.json['Категории постов:'] }}",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Тема": "={{ $json['тема'] }}",
+            "Краткое описание темы": "={{ $json['описание'] }}",
+            "Заголовок для картинки": "={{ $json['баннер'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Итоговый пост",
+              "displayName": "Итоговый пост",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Заголовок для картинки",
+              "displayName": "Заголовок для картинки",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Картинка",
+              "displayName": "Картинка",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Тема",
+              "displayName": "Тема",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Краткое описание темы",
+              "displayName": "Краткое описание темы",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1060,
+        680
+      ],
+      "id": "2cddeec5-8295-449f-b65f-fc63ee32f123",
+      "name": "Google Sheets4"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "topics",
+          "mode": "list",
+          "cachedResultName": "topics"
+        },
+        "embeddingBatchSize": 2,
+        "options": {
+          "queryName": "match_topics"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.1,
+      "position": [
+        1640,
+        660
+      ],
+      "id": "d75f44e6-82e5-4fd9-a00f-b06ec9961ddc",
+      "name": "Supabase Vector Store2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1480,
+        860
+      ],
+      "id": "fcbe4651-1382-4c44-9a50-1156dd2d6ccc",
+      "name": "Embeddings OpenAI5"
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "=Тема: {{ $('Code').item.json['тема'] }}\nОписание: {{ $('Code').item.json['описание'] }}",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "category",
+                "value": "={{ $('Loop Over Items').item.json['Категории постов:'] }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        880
+      ],
+      "id": "007c07a8-d5ec-4809-8ed8-cff48d83f68c",
+      "name": "Default Data Loader2"
+    },
+    {
+      "parameters": {
+        "name": "topics",
+        "topK": 3
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [
+        240,
+        900
+      ],
+      "id": "6c417205-9fee-428b-9cba-2110c2847cc7",
+      "name": "topics"
+    },
+    {
+      "parameters": {
+        "name": "poker",
+        "description": "The vector store contains key information about the Telegram channel project, including its goals, objectives, content categories, and previously used post topics. It is used to generate unique ideas for new posts while preventing duplication of already published content, helping to optimize the posting strategy. The store analyzes the project description and past post data to create relevant and engaging topics, improving content quality and attracting new subscribers.",
+        "topK": "=30"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [
+        580,
+        900
+      ],
+      "id": "d1de9ee5-0c2f-4c6c-af16-02b7a491dc04",
+      "name": "poker"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-nano",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-nano"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        480,
+        1020
+      ],
+      "id": "686811f8-4f3e-45cb-93be-c4ce32946917",
+      "name": "4.1-nano2"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-nano",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-nano"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        840
+      ],
+      "id": "014c2e1d-31fa-4e59-af54-bd24a97fb671",
+      "name": "4.1-nano1"
+    },
+    {
+      "parameters": {
+        "content": "## \n1. Берем категорию"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -320,
+        280
+      ],
+      "typeVersion": 1,
+      "id": "22bff5f1-4902-4cb3-826c-005828e7dad5",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## \n1. Генерируем тему\n2. Генерируем краткое описание\n3. Текст для баннера\n"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "4a24a2dc-466d-41c2-851a-05ec79239660",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## \n1. Генерируем пост в нужном формате\n2. Записываем в гугл таблицу",
+        "width": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        680,
+        280
+      ],
+      "typeVersion": 1,
+      "id": "42d5e3ad-1044-4a12-aaa4-a041031a167c",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## \n1. Записываем тему в гугл таблицу\n2. Записываем тему+краткое описание в векторную БД",
+        "width": 280
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        300,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "4e0e014d-881f-4383-86f8-72b02cd18077",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## \n1. Генерируем изображение\n2. Загружаем в ячейку рядом в гугл таблице"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1040,
+        280
+      ],
+      "typeVersion": 1,
+      "id": "21440624-f3a5-4b10-a49a-a2d765e21a67",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## Берем категорию\n"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1800,
+        300
+      ],
+      "typeVersion": 1,
+      "id": "6d420c89-70fb-445e-9e22-20713da41f8b",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "jsCode": "return JSON.parse($input.first().json.output).map(i => ({ json: i }));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        680
+      ],
+      "id": "47b20a6a-9304-482c-86a0-e8d4ecd2d98a",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "chunkSize": 250,
+        "chunkOverlap": 50
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        1800,
+        1100
+      ],
+      "id": "5a7942ab-7c1a-4e18-aa86-03664b1e2307",
+      "name": "Character Text Splitter"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "fbkingowner",
+    "name": "n8n-backup"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-13T16:08:26.138Z",
+  "versionId": "51955c9e-121b-425e-a083-acfda49e8983"
+}
