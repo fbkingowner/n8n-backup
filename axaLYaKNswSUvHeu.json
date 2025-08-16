@@ -1,0 +1,361 @@
+{
+  "active": false,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-15T14:06:31.173Z",
+  "id": "axaLYaKNswSUvHeu",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "THREADS Content",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -40,
+        20
+      ],
+      "id": "cf9ff8f6-dde8-4c03-a2f1-cec8be2d6bf5",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "15ftvlhYONflnhYa3qYdnQrx37X_ECdekWSlLmsY_H4g",
+          "mode": "list",
+          "cachedResultName": "THREADS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15ftvlhYONflnhYa3qYdnQrx37X_ECdekWSlLmsY_H4g/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Контент THREADS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15ftvlhYONflnhYa3qYdnQrx37X_ECdekWSlLmsY_H4g/edit#gid=0"
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "detectAutomatically"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        180,
+        20
+      ],
+      "id": "f57ba3f1-a45a-4340-90d0-f8ccb2434719",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "SVgQi4tJWBnpD656",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "maxItems": 6,
+        "keep": "lastItems"
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        400,
+        20
+      ],
+      "id": "40739e5f-52f1-4225-a254-4ef2d51fe4b2",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "jsCode": "// --- Константы\nconst ALL_DIRECTIONS = ['Perplexity', 'Reddit', 'How-to', 'Story'];\nconst N_LAST = 6;\nconst MAX_REPEAT = 2; // максимум одинаковых направлений в последних 6 постах\n\n// --- Получаем массив последних направлений (от старого к новому)\nconst lastDirections = items.map(item =>\n  item.json.Направление);\n\n// --- Считаем, сколько раз каждое направление\n// встречается\nconst counts = ALL_DIRECTIONS.reduce((obj, dir) => {\n  obj[dir] = lastDirections.filter(x => x === dir).length;\n  return obj;\n}, {});\n\n// --- Выбираем, какие направления можно\n// использовать (не более MAX_REPEAT и не последнее)\nconst lastDirection = lastDirections[lastDirections.length - 1];\nlet candidates = ALL_DIRECTIONS.filter(dir =>\n  counts[dir] < MAX_REPEAT && dir !== lastDirection\n);\n\n// --- Если вдруг всё равно все направления\n// переполнены, берём всё кроме последнего\nif (candidates.length === 0) {\n  candidates = ALL_DIRECTIONS.filter(dir => dir !== lastDirection);\n}\n\n// --- Если всё ещё пусто (на старте таблицы), берём\n// любой вариант\nif (candidates.length === 0) {\n  candidates = ALL_DIRECTIONS.slice();\n}\n\n// --- Рандомно выбираем из подходящих\nconst nextDirection = candidates[Math.floor(Math.random() * candidates.length)];\n\n// --- n8n возвращаем в формате массива с json\n// (чтобы дальше было удобно)\nreturn [\n  {\n    json: {\n      nextDirection,\n      lastDirections,\n      candidates,\n      counts\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        620,
+        20
+      ],
+      "id": "d29b3f48-8e75-4680-91a8-bf8f128bf90a",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.nextDirection }}",
+                    "rightValue": "Perplexity",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "4fbaa632-712b-46dd-a607-a8ccaaf9a7c7"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Perplexity"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "30cf7d11-6a81-49c5-9fa0-60d9a27ddba4",
+                    "leftValue": "={{ $json.nextDirection }}",
+                    "rightValue": "How to",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "How to"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "01d5ebd1-6786-4b31-834e-34bd65e9b20b",
+                    "leftValue": "={{ $json.nextDirection }}",
+                    "rightValue": "Story",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Story"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "a7616281-1fb3-497b-999e-773831ef2cf9",
+                    "leftValue": "={{ $json.nextDirection }}",
+                    "rightValue": "Reddit",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Reddit"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        900,
+        0
+      ],
+      "id": "dcf0286f-c332-40d9-a205-e7d747b2fed5",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Create a practical How-to guide or useful tip related to AI tools and productivity. Focus on actionable advice that people can apply immediately.\n\nCONTENT REQUIREMENTS:\n✅ Must be practical and immediately actionable\n✅ Related to existing AI tools (ChatGPT, Claude, Midjourney, etc.)\n✅ Provides real value - saves time, money, or improves results\n✅ Suitable for Russian-speaking audience\n✅ Can be completed by a beginner\n\nEXAMPLE DIRECTIONS:\n\n  - ChatGPT prompting techniques and hidden features\n  - Workflow automation with AI tools\n  - Cost-saving strategies for AI subscriptions\n  - Productivity hacks using AI assistants\n  - Step-by-step tutorials for AI tools\n  - Combinations of different AI services\n  - Time-saving tips for content creation\n  - AI tools for specific professions/tasks\n\nPRESENTATION STYLE:\n\n  - Write entirely in Russian language\n  - Be specific and concrete\n  - Include actual steps, tools, or examples\n  - Focus on practical implementation\n  - Make it beginner-friendly\n\nRESPONSE FORMAT:\n{\n  \"заголовок\": \"Catchy title for the how-to guide (up to 60 characters, in Russian)\",\n  \"инструкция\": \"Step-by-step instruction or practical tip (200-400 characters, in Russian)\",\n  \"категория\": \"How-to\",\n  \"причина_выбора\": \"Explanation why this tip is valuable and relevant now (1-2 sentences, in Russian)\"\n}\n\n\nCreate one practical AI how-to guide in Russian\\!\n\nExample Outputs\nExample 1:\n{\n  \"заголовок\": \"3 секретных промпта ChatGPT для идеального резюме\",\n  \"инструкция\": \"1) Проанализируй вакансию [вставь текст] и создай резюме под нее 2) Перепиши мой опыт работы в формате достижений с цифрами 3) Создай сопроводительное письмо, подчеркивающее мои сильные стороны для этой позиции. Каждый промпт использовать по очереди.\",\n  \"категория\": \"How-to\",\n  \"причина_выбора\": \"Поиск работы актуален всегда, а ИИ может значительно улучшить качество резюме и увеличить шансы на собеседование.\"\n}\n\nExample 2:\n{\n  \"заголовок\": \"Как получить ChatGPT Plus бесплатно на месяц\",\n  \"инструкция\": \"1) Используй промокоды от партнёров OpenAI: 2) Зайди на education.github.com 2) Получи Github Student Pack 3) Найди раздел OpenAI credits 4) Активируй $200 кредитов 5) Этого хватит на 4 месяца GPT-4. Работает для студентов и преподавателей.\",\n  \"категория\": \"How-to\",\n  \"причина_выбора\": \"Экономия денег на ИИ-подписках интересует многих пользователей, особенно студентов и начинающих.\"\n}\nExample 3:\n{\n  \"заголовок\": \"Превращаем ChatGPT в персонального коуча за 5 минут\",\n  \"инструкция\": \"1) Создай Custom GPT: 2) Нажми 'Create a GPT' 2) Опиши роль: 'Ты мой личный коуч по [твоя сфера]' 3) Добавь инструкции: 'Задавай мотивирующие вопросы, ставь конкретные задачи, отслеживай прогресс' 4) Загрузи свои цели в файле 5) Сохрани и пользуйся каждый день.\",\n  \"категория\": \"How-to\",\n  \"причина_выбора\": \"Персональное развитие популярно, а ИИ-коуч может быть доступнее и удобнее человека.\"\n}\n",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=Role:\nYou are an AI tools expert and practical guide. Your task is to create actionable, step-by-step instructions and useful tips for working with AI tools that people can immediately apply.\n\n## Working Principles:\n- Focus on PRACTICAL and ACTIONABLE advice\n- Provide concrete steps people can follow right now\n- Use real AI tools and services that actually exist\n- Make instructions clear and beginner-friendly\n- Focus on saving time, money, or improving results\n\n## Content Types:\n- Step-by-step tutorials for AI tools\n- Hidden features and tricks of popular AI services\n- Cost-saving tips for AI subscriptions\n- Workflow optimizations using AI\n- Productivity hacks with AI assistants\n\n## Style Guidelines:\n- Write in Russian language\n- Be specific and concrete — no vague advice\n- Include actual tool names, settings, prompts when relevant\n- Make it immediately applicable\n- Focus on practical value and real results\n\n## Target Audience:\n- Russian-speaking users interested in AI productivity\n- People who want to use AI more effectively\n- Users looking for practical AI applications\n\n## Output Requirements:\n- All text must be in Russian\n- Provide actionable instructions or tips\n- Include specific examples when possible\n- Focus on immediate practical value\n\n## Output Format:\nJSON with fields: \"заголовок\", \"инструкция\", \"категория\" (always \"How-to\"), \"причина_выбора\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        1380,
+        -220
+      ],
+      "id": "3beecb57-0e35-4ec5-91ea-cc893ab7b617",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {
+          "temperature": 0.6
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1320,
+        60
+      ],
+      "id": "92b7ea60-9b04-439b-ab8f-b78fc9242fa4",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "GcW1q7gQjbQDtBqk",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"заголовок\": \"string\",\n  \"инструкция\": \"string\",\n  \"категория\": \"string\",\n  \"причина_выбора\": \"string\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1580,
+        60
+      ],
+      "id": "5ab952f1-65d5-4f1f-b9ed-571c2a388334",
+      "name": "Structured Output Parser"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "fbkingowner",
+    "name": "n8n-backup"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-15T14:33:02.781Z",
+  "versionId": "639b9fdd-809c-4f82-bd1e-98845a32b4c2"
+}
